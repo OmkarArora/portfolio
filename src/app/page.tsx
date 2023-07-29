@@ -1,6 +1,7 @@
 import ProjectCard from "@/components/ProjectCard/ProjectCard";
 import { Project } from "@/types/projects";
 import Image from "next/image";
+import { Tweet } from "react-tweet";
 
 const projects: Project[] = [
   {
@@ -27,19 +28,24 @@ export default function Home() {
       <h1 className="mb-8 text-3xl font-bold tracking-tighter">
         Hey, I'm Omkar 👋
       </h1>
-      <p className="mb-10">
+      <p className="">
         Welcome! Thrilled to have you here.
         <br />
         I'm a software enginner, a tech enthusiast and a gamer at heart. I
         currently work as a Software Engineer at Sparklin, where I am building
         Openvy, a new age conversations platform.
       </p>
-      <h2 className="mb-8 text-2xl font-bold tracking-tighter">Projects</h2>
+      <h2 className="mb-8 mt-10 text-2xl font-bold tracking-tighter">
+        Projects
+      </h2>
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
         {projects.map((item) => (
           <ProjectCard data={item} key={item.id} />
         ))}
       </div>
+
+      <h2 className="mb-8 mt-10 text-2xl font-bold tracking-tighter">Tweets</h2>
+      <Tweet id="1628832338187636740" />
     </main>
   );
 }
