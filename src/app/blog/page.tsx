@@ -1,7 +1,13 @@
 import { allBlogs } from "contentlayer/generated";
 import { compareDesc, format, parseISO } from "date-fns";
+import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "Blogs - Omkar Arora",
+  description: "Read tech blogs by me!",
+};
 
 export default function Page() {
   const sortedBlogs = allBlogs.sort((a, b) =>
