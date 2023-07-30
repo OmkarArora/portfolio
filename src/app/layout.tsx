@@ -29,7 +29,7 @@ export default function RootLayout({
         )}
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <nav className="flex gap-2 py-10">
+          <nav className="flex gap-2 pb-10 pt-6">
             <Link href={"/"}>home</Link>
             <Link href={"/blog"}>blog</Link>
           </nav>

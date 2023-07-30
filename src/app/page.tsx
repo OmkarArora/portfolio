@@ -41,8 +41,6 @@ export default function Home() {
           <ProjectCard data={item} key={item.id} />
         ))}
       </div>
-
-      <h2 className="mb-8 mt-10 text-2xl font-bold tracking-tighter">Tweets</h2>
     </main>
   );
 }
