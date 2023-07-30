@@ -1,7 +1,5 @@
 import ProjectCard from "@/components/ProjectCard/ProjectCard";
 import { Project } from "@/types/projects";
-import Image from "next/image";
-import { Tweet } from "react-tweet";
 
 const projects: Project[] = [
   {
@@ -45,7 +43,6 @@ export default function Home() {
       </div>
 
       <h2 className="mb-8 mt-10 text-2xl font-bold tracking-tighter">Tweets</h2>
-      <Tweet id="1628832338187636740" />
     </main>
   );
 }

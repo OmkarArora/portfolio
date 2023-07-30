@@ -11,10 +11,10 @@ export default function Page() {
   return (
     <div className="flex flex-col">
       <h1 className="mb-8 text-3xl font-bold tracking-tighter">All Blogs</h1>
-      <div className="flex flex-col gap-6">
+      <div className="flex flex-col gap-8 md:gap-6">
         {sortedBlogs.map((blog) => (
           <Link href={`/blog/${blog.slug}`} key={blog._id}>
-            <div className="flex max-w-[300px] flex-col gap-4 md:max-w-[unset] md:flex-row">
+            <div className="flex max-w-[100%] flex-col gap-4 md:max-w-[unset] md:flex-row">
               {blog.image && (
                 <Image
                   src={blog.image}
