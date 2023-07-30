@@ -1,18 +1,18 @@
 ---
 title: "Getting started with Express"
 publishedAt: "2021-08-05"
-summary: "In the words of its authors - Express is a \"Fast, unopinionated, minimalist web framework for Node.js\". It is also one of the most popular Node.js web frameworks.\nSo you want to set up an Express server, this article will help you do just that.\nPrere... "
+summary: "Learn how to use Express in Nodejs "
 ---
 
 <Image
   src="https://cdn.hashnode.com/res/hashnode/image/upload/v1628153300944/A_sSDU52M.png"
-  width={100}
-  height={100}
+  width={1600}
+  height={840}
+  alt="Express Cover"
 />
 
-In the words of its authors - Express is a \"Fast, unopinionated, minimalist web framework for Node.js\". It is also one of the most popular Node.js web frameworks.
+In the words of its authors - Express is a "Fast, unopinionated, minimalist web framework for Node.js". It is also one of the most popular Node.js web frameworks.
 
-<br />
 So you want to set up an Express server, this article will help you do just that.
 
 ## Prerequisites
@@ -21,14 +21,141 @@ So you want to set up an Express server, this article will help you do just that
 
 To set up an Express server, you will need NodeJS and npm installed on your machine. After successful installation of node and npm, create a folder and run :
 
-```node
+```js
 npm init
 ```
 
-```jsx
-import { createClient } from "@supabase/supabase-js";
-let supabase = createClient("https://<project>.supabase.co", "<your-anon-key>");
-let { data } = await supabase.from("countries").select();
+This is a utility that will help you create a package.json file. This file will hold all the metadata about your project like name, versioning, dependencies, etc. You can learn more about this in the official [nodejs docs.](https://nodejs.org/en/knowledge/getting-started/npm/what-is-the-file-package-json/)
+
+### Preconfigured Online IDEs
+
+You can skip the above setup and directly use online IDEs. I have linked a Repl at the end of the article where you can find the full code.
+
+## Installing Express
+
+The express package needs to be installed to run the express server.
+
+```js
+npm install expres
 ```
 
-This is a utility that will help you create a package.json file. This file will hold all the metadata about your project like name, versioning, dependencies, etc. You can learn more about this in the official [nodejs docs.](https://nodejs.org/en/knowledge/getting-started/npm/what-is-the-file-package-json/) \n\n### Preconfigured Online IDEs\nYou can skip the above setup and directly use online IDEs. I have linked a Repl at the end of the article where you can find the full code.\n\n## Installing Express\nThe express package needs to be installed to run the express server.\n`\nnpm install express\n`\nThis command installs the express npm package. For Repl, you may just import the package in the index.js file.\n\n## Express code\n### Boilerplate\n`\nconst express = require('express');\n\nconst app = express();\n\napp.get('/', (req, res) => {\n  res.send('My express app');\n});\n\nconst PORT = 3000;\napp.listen(PORT, () => {\n  console.log('server started at PORT: ', PORT);\n});\n`\nThis is the basic code required to start an express server.\nTo send JSON data do the following : \n`\napp.get('/', (req, res) => {\n  res.json({success: true, message: \"Express server connected\"});\n});\n`\n### body-parser\nThis package helps in parsing incoming request bodies in a middleware before your handlers, available under the req.body property.\n\nThis helps in sending JSON bodies to the server required in a POST API call.\n\n### Routing\nTo make the code clean and modular we can make use of express routers.\nAs an example, we will create a category router. In the routers/categories.router.js file add the following code :\n`\nconst express = require(\"express\");\nconst router = express.Router();\n\nlet categories = [\n  {id: 1, name: \"Cat 1\"},\n  {id: 2, name: \"Cat 2\"},\n  {id: 3, name: \"Cat 3\"}\n]\n\nrouter.route(\"/\")\n  .get(async (req, res) => {\n    try {\n      res.json({ success: true, categories })\n    } catch (error) {\n      res.status(500).json({ success: false, message: \"Unable to get categories\", errorMessage: error.message });\n    }\n  }).post(async (req, res) => {\n    try {\n      const category = req.body;\n      categories = [...categories, category];\n      res.json({ success: true, categories });\n    }\n    catch (error) {\n      res.status(500).json({ success: false, message: \"Unable to create category\", errorMessage: error.message });\n    }\n  })\n\nmodule.exports = router;\n`\nHere we are making use of an array, in projects, this is replaced by databases like MongoDB.\n\nAfter the above changes, our index.js file looks like this - \n`\nconst express = require(\"express\");\nconst bodyParser = require(\"body-parser\");\n\nconst app = express();\napp.use(bodyParser.json());\n\nconst categoryRouter = require(\"./routers/categories.router\");\napp.use(\"/category\", categoryRouter);\n\napp.get('/', (req, res) => {\n  res.json({success: true, message: \"Express server\"});\n});\n\nconst PORT = 3000;\napp.listen(PORT, () => {\n  console.log('server started at PORT: ', PORT);\n});\n`\nIn the above code, we have imported the category router, all the routes defined under this router will be preceded by `/category`. So the category GET API call will be `https://localhost:3000/category`, in your local machine.\n\nThe browser will show the following result on the page -\n\n![expresseg1.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1628151231270/6AuYSB0ax.png)\n\nYou can check out this [Repl ](https://replit.com/@HalfCold/Express-Exmaple#index.js) to find the full code and fork it to customize it to your needs.\n\nHope this article helped you in getting started with Express.\nTo explore more check out these links - \n1. [Express Routing](https://expressjs.com/en/guide/routing.html) \n2. [Express Middleware](https://expressjs.com/en/guide/using-middleware.html)\n\nThese will help you understand routing methods, parameters, and express middleware.
+This command installs the express npm package. For Repl, you may just import the package in the index.js file.
+
+## Express code
+
+### Boilerplate
+
+```js
+const express = require("express");
+
+const app = express();
+
+app.get("/", (req, res) => {
+  res.send("My express app");
+});
+
+const PORT = 3000;
+app.listen(PORT, () => {
+  console.log("server started at PORT: ", PORT);
+});
+```
+
+This is the basic code required to start an express server.
+To send JSON data do the following :
+
+```js
+app.get("/", (req, res) => {
+  res.json({ success: true, message: "Express server connected" });
+});
+```
+
+### body-parser
+
+This package helps in parsing incoming request bodies in a middleware before your handlers, available under the req.body property.
+
+This helps in sending JSON bodies to the server required in a POST API call.
+
+### Routing
+
+To make the code clean and modular we can make use of express routers.
+As an example, we will create a category router. In the routers/categories.router.js file add the following code :
+
+```js
+const express = require("express");
+const router = express.Router();
+
+let categories = [
+  { id: 1, name: "Cat 1" },
+  { id: 2, name: "Cat 2" },
+  { id: 3, name: "Cat 3" },
+];
+
+router
+  .route("/")
+  .get(async (req, res) => {
+    try {
+      res.json({ success: true, categories });
+    } catch (error) {
+      res.status(500).json({
+        success: false,
+        message: "Unable to get categories",
+        errorMessage: error.message,
+      });
+    }
+  })
+  .post(async (req, res) => {
+    try {
+      const category = req.body;
+      categories = [...categories, category];
+      res.json({ success: true, categories });
+    } catch (error) {
+      res.status(500).json({
+        success: false,
+        message: "Unable to create category",
+        errorMessage: error.message,
+      });
+    }
+  });
+
+module.exports = router;
+```
+
+Here we are making use of an array, in projects, this is replaced by databases like MongoDB.
+
+After the above changes, our index.js file looks like this -
+
+```js
+const express = require("express");
+const bodyParser = require("body-parser");
+
+const app = express();
+app.use(bodyParser.json());
+
+const categoryRouter = require("./routers/categories.router");
+app.use("/category", categoryRouter);
+
+app.get("/", (req, res) => {
+  res.json({ success: true, message: "Express server" });
+});
+
+const PORT = 3000;
+app.listen(PORT, () => {
+  console.log("server started at PORT: ", PORT);
+});
+```
+
+In the above code, we have imported the category router, all the routes defined under this router will be preceded by `/category`. So the category GET API call will be `https://localhost:3000/category`, in your local machine.
+
+The browser will show the following result on the page -
+
+![expresseg1.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1628151231270/6AuYSB0ax.png)
+
+You can check out this [Repl ](https://replit.com/@HalfCold/Express-Exmaple#index.js) to find the full code and fork it to customize it to your needs.
+
+Hope this article helped you in getting started with Express.
+To explore more check out these links -
+
+1. [Express Routing](https://expressjs.com/en/guide/routing.html)
+2. [Express Middleware](https://expressjs.com/en/guide/using-middleware.html)
+
+These will help you understand routing methods, parameters, and express middleware.

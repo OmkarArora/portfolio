@@ -25,7 +25,7 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={cn(
-          `${inter.className} mx-4 flex min-h-screen max-w-2xl flex-col antialiased lg:mx-auto`,
+          `${inter.className} mx-4 mb-40 mt-8 flex min-h-screen max-w-2xl flex-col antialiased lg:mx-auto`,
         )}
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
