@@ -1,5 +1,73 @@
 ---
-title: "TypeScript for React - Why and How"
-publishedAt: "2021-07-19"
-summary: "Using TypeScript in React"
+title: TypeScript for React - Why and How
+publishedAt: 2021-07-19
+summary: Using TypeScript in React
+image: https://cdn.hashnode.com/res/hashnode/image/upload/v1620569290336/lKWRRCpE1.png
 ---
+
+<Image
+  src="https://cdn.hashnode.com/res/hashnode/image/upload/v1620569290336/lKWRRCpE1.png"
+  width={1600}
+  height={840}
+  alt="blog cover"
+/>
+
+Hey everyone! This blog will help you set up your environment for a TypeScript React project and help understand the benefits of using TypeScript for the programmer.
+
+# Getting set up with a TypeScript React project
+
+The easiest way to get started with a TypeScript React project is to use create-react-app with the typescript template.
+
+```js
+npx create-react-app my-app --template typescript
+```
+
+This will generate your project with the needed starting code and configurations.
+
+You can also integrate TypeScript in an existing project, you can check out those steps on the docs page [here](https://create-react-app.dev/docs/adding-typescript/)
+
+# Files - JS vs TS
+
+Below you can see the file structure for both a JavaScript and a TypeScript React project generated using create-react-app.
+
+![image.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1620570945443/SuFCW2zmU.png)
+
+The most obvious difference is that the TypeScript project has files ending in `.ts` or`.tsx` . But when comparing the code in both the projects, it is the same default boilerplate code. The real differences are introduced when writing your own components that involve type definitions required in TypeScript.
+
+# Why and What is TypeScript?
+
+TypeScript as a language is a superset of JavaScript, i.e.
+
+- JS is valid TS
+- TS is not valid JS
+
+![image.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1620569973685/aOmA4MJW9.png)
+
+TypeScript just adds extra optional features on top of regular JavaScript.
+
+But browsers don't know how to run TypeScript code, therefore a compiler or transpiler converts our TypeScript into regular JavaScript code.
+
+## tsconfig.json
+
+The purpose of `tsconfig.json` file is to customize the behavior of the TypeScript compiler, which is then able to convert your TypeScript code into any flavor of JavaScript code to run on the browser. You can read more about this file and the different options on the [doc site](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html).
+
+## Benefits of TypeScript in React
+
+### Better component development
+
+By defining types for props and other data, React components become easier to read and understand
+
+### Better code completion
+
+The TypeScript + React combination provides better code completion suggestions for JSX.
+
+### TypeScript support for libraries
+
+All major and most used React libraries have support for TypeScript including Redux, React Bootstrap, Material UI, React Router, and more.
+
+### Benefits of Static Type Checking
+
+With static type checking bugs and errors are identified early. Thus making development and debugging easier.
+This helps in reducing the number of unidentified errors at runtime to very few. Early detection of that something went wrong will ensure that you are not breaking anything.
+
+Type definitions make the codebase much easier to read and maintain. Since we know the exact types expected at a place, anything else will be avoided.

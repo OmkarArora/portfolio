@@ -23,7 +23,7 @@ const computedFields = {
       image: doc.image
         ? `https://portfolio-omkararora.vercel.app/${doc.image}`
         : `https://portfolio-omkararora.vercel.app/og?title=${doc.title}`,
-      url: `hhttps://portfolio-omkararora.vercel.app/blog/${doc._raw.flattenedPath}`,
+      url: `https://portfolio-omkararora.vercel.app/blog/${doc._raw.flattenedPath}`,
       author: {
         "@type": "Person",
         name: "Omkar Arora",

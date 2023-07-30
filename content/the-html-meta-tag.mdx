@@ -1,0 +1,70 @@
+---
+title: The HTML <meta> tag
+publishedAt: 2020-11-23
+summary: Understand how the HTML meta tag works
+image: https://cdn.hashnode.com/res/hashnode/image/upload/v1627893509498/-ZqIyD_u6.png
+---
+
+<Image
+  src="https://cdn.hashnode.com/res/hashnode/image/upload/v1627893509498/-ZqIyD_u6.png"
+  width={1600}
+  height={840}
+  alt="blog cover"
+/>
+
+The &lt;meta&gt; tag is used to define the metadata about the HTML document. Metadata is data or information about the data. The &lt;meta&gt; tag is written inside the &lt;head&gt; tag.
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1627893506625/qPcyNSwZ_.jpeg)
+
+The &lt;meta&gt; tag can have the following attributes —
+
+1. **name**: If the name attribute is set, _document-level_ metadata is provided
+
+1. **http-equiv**: If the http-equiv attribute is set, the meta element is a _pragma directive_, providing information equivalent to what can be given by a similarly-named HTTP header. In simple terms, it indicates the program to perform an action.
+
+1. **charset**: If the charset attribute is set, the meta element is a c*harset declaration*, giving the character encoding in which the document is encoded. Most common charset used is UTF-8 and is understood by all common browsers. Check [IANA character sets](http://www.iana.org/assignments/character-sets/character-sets.xhtml) for all available character encodings.
+
+1. **content**: This attribute contains the _value_ for the http-equiv or name attribute, depending on which is used.
+
+1. **itemprop**: This attribute is available for every HTML element and when used with &lt;meta&gt; tag the meta element provides _user-defined_ metadata. An itemprop consists of a name-value pair. Each name-value pair is called a property, and a group of one or more properties forms an item.
+
+Few examples —
+
+charset : In the below example we set the character encoding to UTF-8
+
+`\n<head>\n <meta charset=\"UTF-8\">\n<head/>\n`
+
+http-equiv : This example will refresh the document very 30 seconds.
+
+`\n<head>\n <meta http-equiv=\"refresh\" content=\"30\">\n<head/>\n`
+
+name : One of the more common use cases for using the name attribute is used to set the viewport. The viewport is the user’s visible area of a web page and varies from one device to another. Setting the viewport is ensures that the website looks good on all devices.
+
+`\n<head>\n <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n</head>\n`
+
+The basic Emmet HTML preset looks like this —
+
+![Basic Emmet HTML preset](https://cdn.hashnode.com/res/hashnode/image/upload/v1627893508213/ZC5qd9bNO.png)_Basic Emmet HTML preset_
+
+As you can see above, two &lt;meta&gt; tags are used. One for defining the charset, and the second defines the viewport. These two can be termed as the more important &lt;meta&gt; tags that should be defined.
+
+## **&lt;meta&gt; tags for SEO**
+
+SEO stands for Search Engine Optimization. SEO is important for your website to be viewed and listed higher in search results so as to get more traffic. SEO can be improved by using &lt;meta&gt; tags in your website.
+
+Some important &lt;meta&gt; tags for SEO are —
+
+1. Meta charset
+
+1. Meta title
+
+1. Meta description
+1. Meta refresh redirect
+
+1. Meta viewport
+
+Learn more about Emmet [here](https://emmet.io/).
+
+To learn more about the &lt;meta&gt; tag and to check browser compatibility visit the [MDN web docs](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta).
+
+You can find more examples [here](https://www.w3schools.com/tags/tag_meta.asp).

@@ -1,0 +1,144 @@
+---
+title: Upload Images from React App to Cloudinary
+publishedAt: 2021-07-15
+summary: This blog helps understand how to upload images to Cloudinary from React
+image: https://cdn.hashnode.com/res/hashnode/image/upload/v1626349691220/PwPbXtFzh.png
+---
+
+<Image
+  src="https://cdn.hashnode.com/res/hashnode/image/upload/v1626349691220/PwPbXtFzh.png"
+  width={1600}
+  height={840}
+  alt="blog cover"
+/>
+
+Hey folks! This article will help you to configure Cloudinary and upload images from your React application to the cloud using the Cloudinary API.
+
+# Prerequisites
+
+Before continuing make sure you have created a Cloudinary account.
+
+## Configuring Upload presets
+
+After you have created your account, go to your account settings. In the Upload section you will find the option to _Add upload preset_.
+
+Here you need to create a new upload preset with the following settings -
+
+- Unique filename : true
+- Delivery type : upload
+- Access mode : public
+
+This creates an Unsigned Upload preset. You can later play around with the access settings to make it private.
+
+Now you are all setup to upload images to your Cloudinary media library.
+
+# Code
+
+Create the input element that accepts appropriate image file types.
+
+```jsx
+<input
+  type="file"
+  accept="image/png, image/jpeg, image/jpg"
+  multiple={false}
+  onChange={onSelectFile}
+/>
+```
+
+## Input onChange event
+
+When the onChange of the input is triggered, onSelectFile method is called. To capture the changes we will use useState.
+Following are the states we will be using -
+
+```jsx
+const [previewImage, setPreviewImage] = useState(null);
+const [selectedFile, setSelectedFile] = useState(null);
+const [uploadedURL, setUploadedURL] = useState(null);
+```
+
+The onSelectFile method two things -
+
+- Reads the file as selected in the input
+- Sets the preview image and the selected image
+
+```jsx
+const onSelectFile = (event) => {
+  const file = event.target.files[0];
+  let reader = new FileReader();
+  reader.readAsDataURL(file);
+  reader.onloadend = (e) => {
+    setPreviewImage(reader.result);
+  };
+  setSelectedFile(file);
+};
+```
+
+## Previewing image before upload
+
+User should be able to preview the image before upload. So, lets add an image tag for previewing image and a Remove button to delete the image and select a new one.
+
+```jsx
+{
+  previewImage && (
+    <div>
+      <button onClick={() => setPreviewImage(null)}>Remove</button>
+    </div>
+  );
+}
+{
+  previewImage && (
+    <div>
+      Preview
+      <img src={previewImage} alt="selected" />
+    </div>
+  );
+}
+```
+
+## Uploading the image
+
+To handle uploads lets create a upload button and a method to handle the button click.
+
+```jsx
+{
+  selectedFile && <button onClick={() => uploadImage()}>Upload</button>;
+}
+```
+
+```jsx
+const uploadImage = async () => {
+  try {
+    const formData = new FormData();
+    formData.append("file", selectedFile);
+    formData.append("upload_preset", "your-image-preset");
+    formData.append("folder", "your-folder-name");
+    const response = await axios.post(
+      "https://api.cloudinary.com/v1_1/your-cloud-name/image/upload",
+      formData,
+    );
+    setUploadedURL(response.data.secure_url);
+    setPreviewImage(null);
+    setSelectedFile(null);
+  } catch (error) {
+    console.error(error);
+  }
+};
+```
+
+The uploadImage method is an async method as it will be handling API calls.
+To upload images we need to create a FormData object and append required properties.
+
+1.  First we append the type i.e. _file_ with the selected image file.
+2.  Then append the upload preset that we made in the Cloudinary prerequisites section.
+3.  The third step is optional but good to follow. Here you have an option to add a folder to which the files will be uploaded.
+
+Finally the API call is made to this API - *https://api.cloudinary.com/v1_1/your-cloud-name/image/upload*
+Here you need to replace \"your-cloud-name\" with the cloud name of your Cloudinary account found on the Dashboard.
+
+After a successful upload the response body has an attribute called _secure_url_. This is the public URL that you can use to access the image.
+
+Check out the below CodeSandbox for reference
+
+%[https://codesandbox.io/embed/image-picker-upload-to-cloudinary-bpf11?fontsize=14&hidenavigation=1&theme=dark]
+
+Note: Remember to add your cloud name and upload preset to successfully upload images.
